@@ -47,7 +47,7 @@ _kubectl create rolebinding ${serviceaccount}-${namespace}-rolebinding --role=${
 
 echo
 echo "***** create kubeconfig file *****"
-rm ${serviceaccount}.config
+rm -rf ${serviceaccount}.config
 kubectl --kubeconfig ${serviceaccount}.config config set-credentials "$serviceaccount" --token="$token" 
 ca_crt="$(mktemp)"; echo "$ca_crt_data" > $ca_crt
 kubectl  --kubeconfig ${serviceaccount}.config config set-cluster "$cluster" --server="$server" --certificate-authority="$ca_crt" --embed-certs
